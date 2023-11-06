@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <el-tree
-    :data="data"
+    :data="menus"
     :props="defaultProps"
     @node-click="handleNodeClick"
   ></el-tree>
@@ -16,10 +16,10 @@ export default {
   components: {},
   data() {
     return {
-      data: [],
+      menus: [],
       defaultProps: {
         children: "children",
-        label: "label",
+        label: "name",
       },
     };
   },
@@ -37,8 +37,10 @@ export default {
         url: this.$http.adornUrl("/product/category/list/tree"),
         method: "get",
       }).then(({ data }) => {
-        console.log("成功获取到菜单数据...", data);
+        console.log("成功获取到菜单数据...", data.data);
         // TODO 获取到菜单数据
+        this.menus=data.data;
+
       });
     },
   },
